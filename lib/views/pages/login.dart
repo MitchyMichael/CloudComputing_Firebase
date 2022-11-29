@@ -103,7 +103,8 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text("Sign in")),
                     ),
                     const SizedBox(height: 16),
-                    Divider(
+                    
+                    const Divider(
                       thickness: 2,
                     ),
                     const SizedBox(height: 16),
@@ -112,15 +113,18 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50,
                       child: ElevatedButton.icon(
                         onPressed: () async {
-                          signInWithGoogle();
+                          AuthService.signInWithGoogle().then((value) {
+                            UiToast.toastOk("Welcome back ${value.user!.displayName}");
+                          });
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Mainmenu()));
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                         ),
-                        label: Text("Sign in with Google"),
-                        icon: FaIcon(FontAwesomeIcons.google),
+                        label: const Text("Sign in with Google"),
+                        icon: const FaIcon(FontAwesomeIcons.google),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -130,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Align(
-            alignment: Alignment(0, 0.9),
+            alignment: const Alignment(0, 0.9),
             child: GestureDetector(
               onTap: () {},
               child: const Text(
