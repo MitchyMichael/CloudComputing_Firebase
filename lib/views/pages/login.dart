@@ -1,9 +1,9 @@
 part of "pages.dart";
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.title});
+  const LoginPage({super.key});
 
-  final String title;
+  // final String title;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -95,7 +95,12 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () async {},
+                          onPressed: () async {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Mainmenu()));
+                          },
                           style: ElevatedButton.styleFrom(
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -103,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text("Sign in")),
                     ),
                     const SizedBox(height: 16),
-                    
                     const Divider(
                       thickness: 2,
                     ),
@@ -114,9 +118,13 @@ class _LoginPageState extends State<LoginPage> {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           AuthService.signInWithGoogle().then((value) {
-                            UiToast.toastOk("Welcome back ${value.user!.displayName}");
+                            UiToast.toastOk(
+                                "Welcome back ${value.user!.displayName}");
                           });
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Mainmenu()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Mainmenu()));
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
